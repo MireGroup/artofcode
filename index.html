@@ -1,0 +1,2239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ArtOfCode | Создание сайтов для бизнеса</title>
+
+    <!-- SEO -->
+    <meta name="description" content="ArtOfCode — создание стильных и продающих сайтов для малого бизнеса: кофейни, барбершопы, цветочные, детейлинг.">
+    <meta name="keywords" content="создание сайтов, сайт для бизнеса, лендинг, сайт-визитка, промосайт, сайт-портфолио">
+    <meta name="author" content="ArtOfCode">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="ArtOfCode — Создание сайтов для бизнеса">
+    <meta property="og:description" content="Стильные и продающие сайты для малого бизнеса: кофейни, барбершопы, цветочные, детейлинг.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="preview.jpg">
+    <meta property="og:url" content="https://artofcode.ru">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- ПЕРЕМЕННЫЕ И СБРОС --- */
+        :root {
+            --bg-dark: #050508;
+            --text-main: #ffffff;
+            --text-muted: #8a8a93;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #d946ef;
+            --gradient-main: linear-gradient(135deg, #a855f7 0%, #d946ef 100%);
+            --gradient-text: linear-gradient(90deg, #c084fc 0%, #e879f9 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+            width: 100%;
+            position: relative;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(217, 70, 239, 0.08), transparent 25%);
+            background-attachment: fixed;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
+
+        .gradient-text {
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* --- БАЗОВЫЕ КНОПКИ --- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-main);
+            color: white;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
+            filter: brightness(1.1);
+        }
+
+        /* --- КНОПКИ БАННЕРА --- */
+        .hero-buttons {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-hero-primary {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            padding: 22px 44px;
+            border-radius: 100px;
+            background: var(--gradient-main);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: none;
+            cursor: pointer;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.5), 0 10px 40px rgba(139, 92, 246, 0.3);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .btn-hero-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+            transition: left 0.6s ease;
+        }
+
+        .btn-hero-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 0 50px rgba(139, 92, 246, 0.7), 0 20px 50px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-hero-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-hero-primary .arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px;
+            height: 26px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-hero-primary:hover .arrow {
+            transform: translateX(4px);
+        }
+
+        .btn-hero-primary .arrow svg {
+            width: 12px;
+            height: 12px;
+            stroke: white;
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .btn-hero-secondary {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            padding: 22px 44px;
+            border-radius: 100px;
+            background: rgba(255, 255, 255, 0.03);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: none;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .btn-hero-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.2);
+        }
+
+        .btn-hero-secondary .arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px;
+            height: 26px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .btn-hero-secondary:hover .arrow {
+            background: var(--gradient-main);
+            transform: translateX(4px);
+        }
+
+        .btn-hero-secondary .arrow svg {
+            width: 12px;
+            height: 12px;
+            stroke: white;
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* --- НАВИГАЦИЯ --- */
+        nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 1400px;
+            padding: 18px 36px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            z-index: 1000;
+            border-radius: 100px;
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 45px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        nav .btn-primary {
+            padding: 10px 24px;
+            font-size: 12px;
+            border-radius: 100px;
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: none;
+            color: white;
+        }
+
+        nav .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: none;
+            transform: none;
+            filter: none;
+        }
+
+        /* --- МОБИЛЬНОЕ МЕНЮ --- */
+        .mobile-menu-btn {
+            display: none;
+            position: relative;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            cursor: pointer;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(139, 92, 246, 0.2);
+        }
+
+        .mobile-menu-btn svg {
+            width: 22px;
+            height: 22px;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .mobile-menu-btn svg path {
+            stroke: white;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn.active {
+            background: var(--gradient-main);
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
+        }
+
+        .mobile-menu-btn.active svg {
+            transform: rotate(135deg) scale(1.1);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 999;
+            background: rgba(5, 5, 8, 0.85);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .mobile-menu.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-menu-inner {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 100px 30px 60px;
+            gap: 10px;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .mobile-menu-inner::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%);
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .mobile-menu-inner a {
+            font-family: 'Syne', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+            padding: 18px 30px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .mobile-menu.active .mobile-menu-inner a {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mobile-menu.active .mobile-menu-inner a:nth-child(1) { transition: all 0.4s ease 0.1s; }
+        .mobile-menu.active .mobile-menu-inner a:nth-child(2) { transition: all 0.4s ease 0.2s; }
+        .mobile-menu.active .mobile-menu-inner a:nth-child(3) { transition: all 0.4s ease 0.3s; }
+        .mobile-menu.active .mobile-menu-inner a:nth-child(4) { transition: all 0.4s ease 0.4s; }
+        .mobile-menu.active .mobile-menu-inner a:nth-child(5) { transition: all 0.4s ease 0.5s; }
+
+        .mobile-menu-inner a:hover,
+        .mobile-menu-inner a:active {
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--accent-pink);
+        }
+
+        .mobile-menu-inner .mobile-cta {
+            margin-top: 30px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 50px;
+            border-radius: 100px;
+            background: var(--gradient-main);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 0 40px rgba(139, 92, 246, 0.5);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            position: relative;
+            z-index: 1;
+        }
+
+        .mobile-menu.active .mobile-menu-inner .mobile-cta {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.4s ease 0.6s;
+        }
+
+        .mobile-menu-inner .mobile-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 60px rgba(139, 92, 246, 0.7);
+        }
+
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        /* --- СЕКЦИИ --- */
+        section {
+            padding: 150px 5%;
+            position: relative;
+        }
+
+        /* --- ГЛАВНЫЙ ЭКРАН --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 250px;
+            padding-bottom: 100px;
+            position: relative;
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 60%);
+            filter: blur(60px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 120px);
+            margin-bottom: 30px;
+            max-width: 1200px;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: clamp(14px, 1.5vw, 16px);
+            max-width: 600px;
+            margin-bottom: 60px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- СЕКЦИЯ О НАС --- */
+        .about-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .about-glass {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            border-radius: 40px;
+            padding: 100px 75px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-glass::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+            filter: blur(60px);
+            pointer-events: none;
+        }
+
+        .about-glass::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            left: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(217, 70, 239, 0.12) 0%, transparent 70%);
+            filter: blur(60px);
+            pointer-events: none;
+        }
+
+        .about-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            gap: 100px;
+            align-items: center;
+        }
+
+        .about-left {
+            flex: 1;
+        }
+
+        .about-left h2 {
+            font-size: clamp(40px, 5vw, 80px);
+            margin-bottom: 30px;
+        }
+
+        .about-left p {
+            color: var(--text-muted);
+            font-size: 18px;
+            max-width: 400px;
+        }
+
+        .about-right {
+            flex: 1.1;
+        }
+
+        .about-right h3 {
+            font-size: 20px;
+            margin-bottom: 35px;
+            color: var(--text-muted);
+            font-weight: 400;
+            text-transform: none;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+        }
+
+        .about-right h3 span {
+            color: white;
+            font-weight: 600;
+        }
+
+        .about-list {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            list-style: none;
+            margin-bottom: 45px;
+        }
+
+        .about-list-item {
+            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .about-list-item::before {
+            content: '';
+            position: absolute;
+            left: -18px;
+            top: 8px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gradient-main);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .about-list-item:hover::before {
+            opacity: 1;
+        }
+
+        .about-list-item:hover {
+            transform: translateX(6px);
+        }
+
+        .about-list-number {
+            font-family: 'Syne', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-pink);
+            min-width: 32px;
+            letter-spacing: 1px;
+            padding-top: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .about-list-item:hover .about-list-number {
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-list-text {
+            flex: 1;
+            font-size: 15.5px;
+            font-weight: 500;
+            color: white;
+            line-height: 1.5;
+        }
+
+        .about-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-about-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 36px;
+            border-radius: 100px;
+            background: var(--gradient-main);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.4), 0 8px 30px rgba(139, 92, 246, 0.2);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .btn-about-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
+            transition: left 0.6s ease;
+        }
+
+        .btn-about-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 40px rgba(139, 92, 246, 0.6), 0 15px 40px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-about-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-about-primary .arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-about-primary:hover .arrow {
+            transform: translateX(4px);
+        }
+
+        .btn-about-primary .arrow svg {
+            width: 11px;
+            height: 11px;
+            stroke: white;
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .btn-about-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 18px 36px;
+            border-radius: 100px;
+            background: rgba(255, 255, 255, 0.03);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .btn-about-secondary:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(139, 92, 246, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(139, 92, 246, 0.15);
+        }
+
+        /* =========================================
+           ПАКЕТЫ УСЛУГ
+           ========================================= */
+        .packages-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .packages-glass {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            border-radius: 40px;
+            padding: 100px 75px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .packages-glass::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+            filter: blur(60px);
+            pointer-events: none;
+        }
+
+        .packages-glass::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            left: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(217, 70, 239, 0.12) 0%, transparent 70%);
+            filter: blur(60px);
+            pointer-events: none;
+        }
+
+        .packages-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .packages-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .packages-header h2 {
+            font-size: clamp(40px, 5vw, 80px);
+            margin-bottom: 25px;
+        }
+
+        .packages-header p {
+            color: var(--text-muted);
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .package-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 28px;
+            padding: 40px 32px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .package-card:hover {
+            background: rgba(139, 92, 246, 0.06);
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(139, 92, 246, 0.15);
+        }
+
+        .package-card.popular {
+            background: rgba(139, 92, 246, 0.08);
+            border: 1.5px solid rgba(139, 92, 246, 0.4);
+            box-shadow: 0 0 50px rgba(139, 92, 246, 0.2);
+            transform: scale(1.02);
+        }
+
+        .package-card.popular:hover {
+            transform: scale(1.02) translateY(-8px);
+            box-shadow: 0 30px 60px rgba(139, 92, 246, 0.35);
+        }
+
+        .package-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 6px 14px;
+            border-radius: 100px;
+            background: var(--gradient-main);
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: white;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+        }
+
+        .package-name {
+            font-family: 'Syne', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .package-price {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 32px;
+            padding-bottom: 28px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .price-value {
+            font-family: 'Syne', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            background: var(--gradient-text);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+
+        .price-note {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .package-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 32px;
+            flex-grow: 1;
+        }
+
+        .package-features li {
+            position: relative;
+            padding-left: 26px;
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 14.5px;
+            line-height: 1.5;
+        }
+
+        .package-features li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 14px;
+            height: 8px;
+            border-left: 2px solid var(--accent-pink);
+            border-bottom: 2px solid var(--accent-pink);
+            transform: rotate(-45deg);
+            border-radius: 1px;
+        }
+
+        .package-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 28px;
+            border-radius: 100px;
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            margin-top: auto;
+        }
+
+        .package-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(139, 92, 246, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .package-btn .arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .package-btn:hover .arrow {
+            background: var(--gradient-main);
+            transform: translateX(3px);
+        }
+
+        .package-btn .arrow svg {
+            width: 10px;
+            height: 10px;
+            stroke: white;
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .package-btn-popular {
+            background: var(--gradient-main);
+            border: none;
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.5);
+        }
+
+        .package-btn-popular:hover {
+            box-shadow: 0 0 40px rgba(139, 92, 246, 0.7);
+        }
+
+        .package-btn-popular .arrow {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* =========================================
+           СЕКЦИЯ ПОРТФОЛИО
+           ========================================= */
+        .portfolio-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .portfolio-glass {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(40px) saturate(180%);
+            -webkit-backdrop-filter: blur(40px) saturate(180%);
+            border-radius: 40px;
+            padding: 100px 75px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-glass::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            left: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+            filter: blur(60px);
+            pointer-events: none;
+        }
+
+        .portfolio-glass::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(217, 70, 239, 0.12) 0%, transparent 70%);
+            filter: blur(60px);
+            pointer-events: none;
+        }
+
+        .portfolio-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .portfolio-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .portfolio-header h2 {
+            font-size: clamp(40px, 5vw, 80px);
+            margin-bottom: 25px;
+        }
+
+        .portfolio-header p {
+            color: var(--text-muted);
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .portfolio-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            padding: 6px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 100px;
+            margin: 0 auto 50px;
+            max-width: fit-content;
+            flex-wrap: wrap;
+                        backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .portfolio-tab {
+            padding: 14px 32px;
+            border-radius: 100px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            border: none;
+            background: transparent;
+            white-space: nowrap;
+        }
+
+        .portfolio-tab:hover {
+            color: white;
+        }
+
+        .portfolio-tab.active {
+            background: var(--gradient-main);
+            color: white;
+            box-shadow: 0 5px 25px rgba(139, 92, 246, 0.5);
+        }
+
+        .portfolio-description {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 24px;
+            padding: 45px 50px;
+            margin-bottom: 60px;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-description::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--gradient-main);
+            border-radius: 4px;
+        }
+
+        .portfolio-description.is-changing {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .portfolio-desc-title {
+            font-size: 28px;
+            margin-bottom: 18px;
+            color: white;
+        }
+
+        .portfolio-desc-text {
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.8;
+            max-width: 900px;
+        }
+
+        .portfolio-empty {
+            text-align: center;
+            padding: 90px 30px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-empty::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+            filter: blur(60px);
+            pointer-events: none;
+        }
+
+        .portfolio-empty-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(139, 92, 246, 0.1);
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+            animation: iconPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.3); }
+            50% { box-shadow: 0 0 0 20px rgba(139, 92, 246, 0); }
+        }
+
+        .portfolio-empty-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--accent-pink);
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .portfolio-empty-title {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .portfolio-empty-text {
+            color: var(--text-muted);
+            font-size: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* =========================================
+           СЕКЦИЯ С ФОРМОЙ
+           ========================================= */
+        .contact-section {
+            padding: 0 5% 150px;
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #4c1d95 0%, #a855f7 50%, #d946ef 100%);
+            border-radius: 40px;
+            padding: 100px 50px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 80px rgba(139, 92, 246, 0.4);
+            text-align: center;
+        }
+
+        .contact-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .contact-container h2 {
+            font-size: clamp(32px, 5vw, 64px);
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-container p {
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 60px;
+            color: rgba(255, 255, 255, 0.8);
+            position: relative;
+            z-index: 2;
+        }
+
+        .contact-form {
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 20px 28px;
+            background: rgba(0, 0, 0, 0.2);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-control:focus {
+            background: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+        }
+
+        select.form-control {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            cursor: pointer;
+        }
+
+        select.form-control option {
+            background: #1a1a24;
+            color: white;
+        }
+
+        /* --- ЧЕКБОКС СОГЛАСИЯ --- */
+        .checkbox-group {
+            margin-bottom: 20px;
+            margin-top: 4px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+
+        .checkbox-label input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkbox-custom {
+            position: relative;
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1.5px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            margin-top: 2px;
+        }
+
+        .checkbox-custom::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 6px;
+            border-left: 2px solid white;
+            border-bottom: 2px solid white;
+            transform: translate(-50%, -70%) rotate(-45deg) scale(0);
+            transition: transform 0.2s ease;
+        }
+
+        .checkbox-label input[type="checkbox"]:checked ~ .checkbox-custom {
+            background: var(--gradient-main);
+            border-color: transparent;
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+        }
+
+        .checkbox-label input[type="checkbox"]:checked ~ .checkbox-custom::after {
+            transform: translate(-50%, -70%) rotate(-45deg) scale(1);
+        }
+
+        .checkbox-text {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .checkbox-text a {
+            color: #c084fc;
+            text-decoration: underline;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .checkbox-text a:hover {
+            color: #e879f9;
+        }
+
+        .contact-btn {
+            width: 100%;
+            background: white;
+            color: #1a1a24;
+            padding: 22px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .contact-btn:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* --- ФУТЕР --- */
+        footer {
+            padding: 50px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .social-links a {
+            color: var(--text-muted);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .social-links a:hover {
+            color: white;
+        }
+
+        /* =========================================
+           АДАПТИВ
+           ========================================= */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 60px;
+            }
+            .about-left p {
+                margin: 0 auto;
+            }
+            .about-glass,
+            .portfolio-glass,
+            .packages-glass {
+                padding: 70px 45px;
+            }
+            .about-list-item {
+                text-align: left;
+            }
+            .about-buttons {
+                justify-content: center;
+            }
+            .packages-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .package-card.popular {
+                transform: none;
+            }
+            .package-card.popular:hover {
+                transform: translateY(-8px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                top: 12px;
+                width: calc(100% - 24px);
+                padding: 12px 18px;
+                border-radius: 100px;
+            }
+            .nav-links {
+                display: none;
+            }
+            .logo {
+                font-size: 18px;
+            }
+            nav .btn-primary {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: flex;
+            }
+            .mobile-menu {
+                display: block;
+            }
+
+            section {
+                padding: 90px 5%;
+            }
+
+            .hero {
+                padding-top: 160px;
+                min-height: auto;
+                padding-bottom: 90px;
+            }
+            .hero h1 {
+                font-size: clamp(34px, 9vw, 52px);
+                margin-bottom: 22px;
+                letter-spacing: -0.03em;
+            }
+            .hero p {
+                font-size: 12px;
+                margin-bottom: 45px;
+                padding: 0 10px;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+                gap: 14px;
+            }
+            .btn-hero-primary,
+            .btn-hero-secondary {
+                width: 100%;
+                padding: 20px 28px;
+                font-size: 13px;
+                justify-content: center;
+                letter-spacing: 1.2px;
+            }
+
+            .about-glass {
+                padding: 50px 24px;
+                border-radius: 28px;
+            }
+            .about-left h2 {
+                font-size: clamp(30px, 8vw, 42px);
+                margin-bottom: 22px;
+            }
+            .about-left p {
+                font-size: 15px;
+                line-height: 1.6;
+            }
+            .about-right h3 {
+                font-size: 16px;
+                margin-bottom: 28px;
+            }
+            .about-list {
+                gap: 18px;
+                margin-bottom: 35px;
+                text-align: left;
+            }
+            .about-list-item {
+                gap: 16px;
+            }
+            .about-list-number {
+                font-size: 13px;
+                min-width: 26px;
+            }
+            .about-list-text {
+                font-size: 14px;
+                line-height: 1.5;
+            }
+            .about-buttons {
+                flex-direction: column;
+                gap: 12px;
+                width: 100%;
+            }
+            .btn-about-primary,
+            .btn-about-secondary {
+                width: 100%;
+                justify-content: center;
+                padding: 16px 26px;
+                font-size: 13px;
+                letter-spacing: 1.1px;
+            }
+
+            .packages-glass {
+                padding: 50px 22px;
+                border-radius: 28px;
+            }
+            .packages-header {
+                margin-bottom: 45px;
+                padding: 0 6px;
+            }
+            .packages-header h2 {
+                font-size: clamp(28px, 8vw, 38px);
+                margin-bottom: 18px;
+            }
+            .packages-header p {
+                font-size: 12.5px;
+                letter-spacing: 1.2px;
+            }
+            .package-card {
+                padding: 32px 24px;
+                border-radius: 22px;
+            }
+            .package-name {
+                font-size: 22px;
+                margin-bottom: 16px;
+            }
+            .price-value {
+                font-size: 26px;
+            }
+            .package-features li {
+                font-size: 13.5px;
+            }
+            .package-btn {
+                padding: 14px 24px;
+                font-size: 12.5px;
+            }
+
+            .portfolio-glass {
+                padding: 50px 22px;
+                border-radius: 28px;
+            }
+            .portfolio-header {
+                margin-bottom: 38px;
+                padding: 0 6px;
+            }
+            .portfolio-header h2 {
+                font-size: clamp(28px, 8vw, 38px);
+                margin-bottom: 18px;
+            }
+            .portfolio-header p {
+                font-size: 12.5px;
+                letter-spacing: 1.2px;
+            }
+            .portfolio-tabs {
+                flex-direction: column;
+                width: 100%;
+                max-width: 100%;
+                border-radius: 20px;
+                gap: 4px;
+                padding: 8px;
+                margin-bottom: 32px;
+            }
+            .portfolio-tab {
+                width: 100%;
+                padding: 14px 20px;
+                font-size: 12px;
+                border-radius: 14px;
+                text-align: center;
+                letter-spacing: 1px;
+            }
+            .portfolio-description {
+                padding: 30px 22px 30px 26px;
+                margin-bottom: 38px;
+                border-radius: 20px;
+            }
+            .portfolio-desc-title {
+                font-size: 21px;
+                margin-bottom: 14px;
+            }
+            .portfolio-desc-text {
+                font-size: 14px;
+                line-height: 1.7;
+            }
+            .portfolio-empty {
+                padding: 60px 22px;
+                border-radius: 20px;
+            }
+            .portfolio-empty-icon {
+                width: 65px;
+                height: 65px;
+                margin-bottom: 20px;
+            }
+            .portfolio-empty-icon svg {
+                width: 26px;
+                height: 26px;
+            }
+            .portfolio-empty-title {
+                font-size: 19px;
+                margin-bottom: 10px;
+            }
+            .portfolio-empty-text {
+                font-size: 13.5px;
+                line-height: 1.6;
+            }
+
+            .contact-section {
+                padding: 0 5% 90px;
+            }
+            .contact-container {
+                padding: 60px 22px;
+                border-radius: 24px;
+            }
+            .contact-container h2 {
+                font-size: 26px;
+                margin-bottom: 14px;
+            }
+            .contact-container p {
+                font-size: 12.5px;
+                margin-bottom: 36px;
+                letter-spacing: 0.8px;
+            }
+            .form-control {
+                padding: 16px 20px;
+                font-size: 15px;
+            }
+            .contact-btn {
+                padding: 18px;
+                font-size: 14px;
+                letter-spacing: 1.5px;
+                margin-top: 14px;
+            }
+            .checkbox-text {
+                font-size: 12.5px;
+            }
+            .checkbox-custom {
+                width: 18px;
+                height: 18px;
+            }
+
+            footer {
+                flex-direction: column;
+                text-align: center;
+                gap: 28px;
+                padding: 45px 5%;
+            }
+            .social-links {
+                justify-content: center;
+                width: 100%;
+                gap: 20px;
+                flex-direction: column;
+            }
+            .social-links a {
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .hero h1 {
+                font-size: 30px;
+            }
+            .hero p {
+                font-size: 11.5px;
+            }
+
+            .about-glass {
+                padding: 42px 18px;
+                border-radius: 24px;
+            }
+            .about-left h2 {
+                font-size: 26px;
+            }
+            .about-left p {
+                font-size: 14px;
+            }
+            .about-right h3 {
+                font-size: 15px;
+            }
+            .about-list-item {
+                gap: 14px;
+            }
+            .about-list-number {
+                font-size: 12px;
+                min-width: 24px;
+            }
+            .about-list-text {
+                font-size: 13px;
+            }
+            .btn-about-primary,
+            .btn-about-secondary {
+                padding: 15px 22px;
+                font-size: 12px;
+            }
+
+            .packages-glass {
+                padding: 42px 16px;
+                border-radius: 24px;
+            }
+            .packages-header h2 {
+                font-size: 26px;
+            }
+            .package-card {
+                padding: 26px 20px;
+            }
+            .package-name {
+                font-size: 20px;
+            }
+            .price-value {
+                font-size: 22px;
+            }
+            .package-features li {
+                font-size: 13px;
+            }
+
+            .portfolio-glass {
+                padding: 42px 16px;
+                border-radius: 24px;
+            }
+            .portfolio-header h2 {
+                font-size: 26px;
+            }
+            .portfolio-tab {
+                font-size: 11px;
+                padding: 12px 16px;
+            }
+            .portfolio-desc-title {
+                font-size: 19px;
+            }
+            .portfolio-desc-text {
+                font-size: 13px;
+            }
+            .portfolio-empty {
+                padding: 50px 18px;
+            }
+            .portfolio-empty-title {
+                font-size: 17px;
+            }
+            .portfolio-empty-text {
+                font-size: 12.5px;
+            }
+
+            .contact-container {
+                padding: 50px 18px;
+                border-radius: 22px;
+            }
+            .contact-container h2 {
+                font-size: 22px;
+            }
+            .contact-container p {
+                font-size: 11.5px;
+            }
+            .form-control {
+                padding: 14px 16px;
+                font-size: 14px;
+            }
+            .contact-btn {
+                padding: 16px;
+                font-size: 13px;
+            }
+            .checkbox-text {
+                font-size: 12px;
+            }
+
+            .mobile-menu-inner a {
+                font-size: 26px;
+                padding: 14px 24px;
+            }
+            .mobile-menu-inner .mobile-cta {
+                padding: 18px 40px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Навигация -->
+    <nav>
+        <div class="logo">ArtOfCode</div>
+        <div class="nav-links">
+            <a href="#about">О нас</a>
+            <a href="#packages">Пакеты</a>
+            <a href="#portfolio">Работы</a>
+            <a href="#contact">Контакты</a>
+        </div>
+        <a href="#contact" class="btn btn-primary">Связаться</a>
+
+        <!-- Кнопка мобильного меню -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Открыть меню">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2 L14 9 L21 12 L14 15 L12 22 L10 15 L3 12 L10 9 Z"/>
+            </svg>
+        </button>
+    </nav>
+
+    <!-- Модальное меню для телефонов -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-inner">
+            <a href="#about" class="mobile-link">О нас</a>
+            <a href="#packages" class="mobile-link">Пакеты</a>
+            <a href="#portfolio" class="mobile-link">Работы</a>
+            <a href="#contact" class="mobile-link">Контакты</a>
+            <a href="#contact" class="mobile-cta mobile-link">Заказать сайт</a>
+        </div>
+    </div>
+
+    <!-- Главный экран -->
+    <section class="hero">
+        <div class="hero-glow"></div>
+        <h1>СОЗДАЕМ <span class="gradient-text">САЙТЫ</span><br>ДЛЯ ВАШЕГО БИЗНЕСА</h1>
+        <p>Комплексные решения для малого бизнеса: кофейни, барбершопы, цветочные и детейлинг. Быстро, стильно, эффективно.</p>
+        <div class="hero-buttons">
+            <a href="#contact" class="btn-hero-primary">
+                Обсудить проект
+                <span class="arrow">
+                    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </span>
+            </a>
+            <a href="#portfolio" class="btn-hero-secondary">
+                Наши работы
+                <span class="arrow">
+                    <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </span>
+            </a>
+        </div>
+    </section>
+
+    <!-- СЕКЦИЯ О НАС -->
+    <section id="about" class="about-section">
+        <div class="about-glass">
+            <div class="about-content">
+
+                <div class="about-left">
+                    <h2>МЫ СТУДИЯ <br><span class="gradient-text">ARTOFCODE</span></h2>
+                    <p>Мы предлагаем инновационные веб-решения для улучшения вашего бизнеса и привлечения клиентов.</p>
+                </div>
+
+                <div class="about-right">
+                    <h3>5 причин выбрать <span>ArtOfCode</span></h3>
+
+                    <ul class="about-list">
+                        <li class="about-list-item">
+                            <span class="about-list-number">01</span>
+                            <span class="about-list-text">Сайт, который продаёт, а не просто существует</span>
+                        </li>
+
+                        <li class="about-list-item">
+                            <span class="about-list-number">02</span>
+                            <span class="about-list-text">Дизайн под ваш бренд и атмосферу</span>
+                        </li>
+
+                        <li class="about-list-item">
+                            <span class="about-list-number">03</span>
+                            <span class="about-list-text">Идеальный вид на телефонах клиентов</span>
+                        </li>
+
+                        <li class="about-list-item">
+                            <span class="about-list-number">04</span>
+                            <span class="about-list-text">Запуск в короткие сроки без переплат</span>
+                        </li>
+
+                        <li class="about-list-item">
+                            <span class="about-list-number">05</span>
+                            <span class="about-list-text">Поддержку и правки после запуска</span>
+                        </li>
+                    </ul>
+
+                    <div class="about-buttons">
+                        <a href="#contact" class="btn-about-primary">
+                            Заказать сайт
+                            <span class="arrow">
+                                <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </span>
+                        </a>
+                        <a href="#portfolio" class="btn-about-secondary">
+                            Смотреть работы
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ПАКЕТЫ УСЛУГ -->
+    <section id="packages" class="packages-section">
+        <div class="packages-glass">
+            <div class="packages-content">
+
+                <div class="packages-header">
+                    <h2>ПАКЕТЫ <span class="gradient-text">УСЛУГ</span></h2>
+                    <p>Выберите подходящий вариант под ваш бизнес</p>
+                </div>
+
+                <div class="packages-grid">
+
+                    <div class="package-card">
+                        <div class="package-name">Старт</div>
+                        <div class="package-price">
+                            <span class="price-value">от 15 000 ₽</span>
+                            <span class="price-note">срок: 3–5 дней</span>
+                        </div>
+                        <ul class="package-features">
+                            <li>Одностраничный сайт</li>
+                            <li>Адаптив под телефоны</li>
+                            <li>Форма заявки в Telegram</li>
+                            <li>Базовый дизайн</li>
+                            <li>Помощь с хостингом и доменом</li>
+                        </ul>
+                        <a href="#contact" class="package-btn">
+                            Заказать
+                            <span class="arrow">
+                                <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="package-card popular">
+                        <div class="package-badge">Популярный</div>
+                        <div class="package-name">Бизнес</div>
+                        <div class="package-price">
+                            <span class="price-value">от 30 000 ₽</span>
+                            <span class="price-note">срок: 7–10 дней</span>
+                        </div>
+                        <ul class="package-features">
+                            <li>Сайт из 3–5 страниц</li>
+                            <li>Уникальный дизайн под бренд</li>
+                            <li>Адаптив + проверка на всех устройствах</li>
+                            <li>Форма заявки в Telegram</li>
+                            <li>Онлайн-запись / меню / галерея</li>
+                            <li>Базовая SEO-оптимизация</li>
+                        </ul>
+                        <a href="#contact" class="package-btn package-btn-popular">
+                            Заказать
+                            <span class="arrow">
+                                <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="package-card">
+                        <div class="package-name">Премиум</div>
+                        <div class="package-price">
+                            <span class="price-value">от 60 000 ₽</span>
+                            <span class="price-note">срок: от 14 дней</span>
+                        </div>
+                        <ul class="package-features">
+                            <li>Многостраничный сайт</li>
+                            <li>Индивидуальный дизайн + анимации</li>
+                            <li>Расширенная SEO-оптимизация</li>
+                            <li>Подключение аналитики</li>
+                            <li>Интеграции с CRM / мессенджерами</li>
+                            <li>Поддержка 3 месяца после запуска</li>
+                        </ul>
+                        <a href="#contact" class="package-btn">
+                            Заказать
+                            <span class="arrow">
+                                <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </span>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ПОРТФОЛИО -->
+    <section id="portfolio" class="portfolio-section">
+        <div class="portfolio-glass">
+            <div class="portfolio-content">
+
+                <div class="portfolio-header">
+                    <h2>ЧТО МЫ <span class="gradient-text">СОЗДАЁМ</span></h2>
+                    <p>Выберите тип сайта, чтобы узнать подробнее</p>
+                </div>
+
+                <div class="portfolio-tabs" role="tablist">
+                    <button class="portfolio-tab active" role="tab" aria-selected="true" data-tab="promo">Промосайт</button>
+                    <button class="portfolio-tab" role="tab" aria-selected="false" data-tab="vizitka">Сайт‑визитка</button>
+                    <button class="portfolio-tab" role="tab" aria-selected="false" data-tab="portfolio">Сайт‑портфолио</button>
+                </div>
+
+                <div class="portfolio-description" id="portfolioDescription">
+                    <h3 class="portfolio-desc-title" id="descTitle">Промосайт</h3>
+                    <p class="portfolio-desc-text" id="descText">
+                        Часто тоже одностраничный, но фокус не только на продаже, а на имидже и запоминаемости. Делают под акцию, запуск продукта или мероприятие: тут больше креатива, игр, тестов, нестандартного дизайна. В отличие от лендинга, задача — не только конверсия, но и формирование образа бренда.
+                    </p>
+                </div>
+
+                <div class="portfolio-empty">
+                    <div class="portfolio-empty-icon">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                        </svg>
+                    </div>
+                    <h4 class="portfolio-empty-title">Скоро здесь появятся наши работы</h4>
+                    <p class="portfolio-empty-text">
+                        Мы активно работаем над новыми проектами. Загляните позже — здесь появятся наши кейсы для малого бизнеса.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Секция с формой -->
+    <section id="contact" class="contact-section">
+        <div class="contact-container">
+            <h2>НАЧНЕМ ВАШ ПРОЕКТ</h2>
+            <p>Заполните форму, и мы свяжемся с вами в Telegram</p>
+
+            <form id="tgForm" class="contact-form">
+                <div class="form-group">
+                    <input type="text" id="name" class="form-control" placeholder="Ваше имя" required>
+                </div>
+
+                <div class="form-group">
+                    <select id="business" class="form-control" required>
+                        <option value="" disabled selected>Сфера вашего бизнеса</option>
+                        <option value="Кофейня / Ресторан">Кофейня / Ресторан</option>
+                        <option value="Барбершоп / Салон красоты">Барбершоп / Салон красоты</option>
+                        <option value="Цветочный магазин">Цветочный магазин</option>
+                        <option value="Детейлинг / Автосервис">Детейлинг / Автосервис</option>
+                        <option value="Другой малый бизнес">Другой малый бизнес</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" id="message" class="form-control" placeholder="Кратко о задаче (например: нужен сайт с меню)" required>
+                </div>
+
+                <!-- Чекбокс согласия -->
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="privacyCheck" required>
+                        <span class="checkbox-custom"></span>
+                        <span class="checkbox-text">
+                            Я даю согласие на обработку персональных данных в соответствии с
+                            <a href="privacy.html" target="_blank">Политикой конфиденциальности</a>
+                        </span>
+                    </label>
+                </div>
+
+                <button type="submit" class="contact-btn">Отправить в Telegram</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <div class="logo">ArtOfCode</div>
+        <div class="social-links">
+            <a href="https://t.me/ArtOfCode_ru" target="_blank" rel="noopener">Telegram</a>
+            <a href="https://vk.ru/artofcode_ru" target="_blank" rel="noopener">ВКонтакте</a>
+            <a href="mailto:ArtOfCode-ru@yandex.ru">ArtOfCode-ru@yandex.ru</a>
+            <a href="privacy.html" target="_blank">Политика конфиденциальности</a>
+        </div>
+        <p style="color: var(--text-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;">
+            &copy; <span id="year"></span> ArtOfCode
+        </p>
+    </footer>
+
+    <!-- Логика -->
+    <script>
+        // Автогод в футере
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Мобильное меню
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenuBtn.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuBtn.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                });
+            });
+        }
+
+        // Данные для портфолио
+        const portfolioData = {
+            promo: {
+                title: 'Промосайт',
+                text: 'Часто тоже одностраничный, но фокус не только на продаже, а на имидже и запоминаемости. Делают под акцию, запуск продукта или мероприятие: тут больше креатива, игр, тестов, нестандартного дизайна. В отличие от лендинга, задача — не только конверсия, но и формирование образа бренда.'
+            },
+            vizitka: {
+                title: 'Сайт‑визитка',
+                text: 'Небольшой сайт (может быть и одностраничным, и из 3–5 страниц) для представления компании или специалиста и контактов. Продаёт слабее, чем лендинг: его цель — рассказать «кто мы» и дать способ связи.'
+            },
+            portfolio: {
+                title: 'Сайт‑портфолио',
+                text: 'Похож на визитку, но главный акцент — на работах и кейсах. Подходит фотографам, дизайнерам, разработчикам. Может быть сделан как одностраничник в стиле лендинга (скроллишь вниз — смотришь проекты), но CTA (призыв к действию) тут мягче: «Заказать проект», «Посмотреть детали».'
+            }
+        };
+
+        const tabs = document.querySelectorAll('.portfolio-tab');
+        const descBlock = document.getElementById('portfolioDescription');
+        const descTitle = document.getElementById('descTitle');
+        const descText = document.getElementById('descText');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const key = tab.dataset.tab;
+                if (tab.classList.contains('active')) return;
+
+                tabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-selected', 'false');
+                });
+                tab.classList.add('active');
+                tab.setAttribute('aria-selected', 'true');
+
+                descBlock.classList.add('is-changing');
+
+                setTimeout(() => {
+                    const data = portfolioData[key];
+                    descTitle.textContent = data.title;
+                    descText.textContent = data.text;
+                    descBlock.classList.remove('is-changing');
+                }, 300);
+            });
+        });
+
+        // Отправка формы в Telegram
+        const tgForm = document.getElementById('tgForm');
+
+        tgForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Проверка согласия с политикой
+            const privacyCheck = document.getElementById('privacyCheck');
+            if (!privacyCheck.checked) {
+                alert('Пожалуйста, подтвердите согласие на обработку персональных данных.');
+                return;
+            }
+
+            const name = document.getElementById('name').value.trim();
+            const business = document.getElementById('business').value;
+            const message = document.getElementById('message').value.trim();
+
+            const text =
+                'Здравствуйте! Хочу заказать сайт в ArtOfCode.\n\n' +
+                '👤 Имя: ' + name + '\n' +
+                '🏢 Сфера бизнеса: ' + business + '\n' +
+                '📝 Задача: ' + message;
+
+            const encodedText = encodeURIComponent(text);
+            const telegramUsername = 'ilyamire';
+
+            const telegramUrl = 'https://t.me/' + telegramUsername + '?text=' + encodedText;
+            window.open(telegramUrl, '_blank');
+
+            this.reset();
+        });
+    </script>
+</body>
+</html>
